@@ -1,0 +1,141 @@
+# Example Brand Configuration
+
+brand:
+  id: "example-brand"
+  name: "Example Brand"
+  description: "Example brand configuration for documentation publishing"
+  website: "https://example-brand.com"
+  contact_email: "docs@example-brand.com"
+
+# Brand-specific settings
+settings:
+  # Supported documentation categories
+  categories:
+    - getting-started
+    - user-guides
+    - developer-guides
+    - api-reference
+    - tutorials
+    - best-practices
+    - troubleshooting
+    - release-notes
+  
+  # Preferred formats
+  input_formats:
+    - markdown
+    - html
+  
+  output_formats:
+    - html
+    - pdf
+  
+  # Publishing destinations
+  destinations:
+    - type: "static-site"
+      url: "https://docs.example-brand.com"
+      path: "/published"
+    - type: "confluence"
+      space: "DOCS"
+      parent_page: "Documentation"
+
+# Styling preferences
+styling:
+  theme: "light"
+  primary_color: "#007bff"
+  secondary_color: "#6c757d"
+  font_family: "Inter, sans-serif"
+  code_font: "Fira Code, monospace"
+  
+  layout:
+    max_width: "1200px"
+    sidebar: true
+    toc: true
+    breadcrumbs: true
+
+# Brand guidelines
+guidelines:
+  tone: "professional"
+  voice: "active"
+  perspective: "second-person"  # Use "you" instead of "the user"
+  
+  # Terminology preferences
+  terminology:
+    - prefer: "documentation"
+      avoid: "docs"
+    - prefer: "click"
+      avoid: "click on"
+    - prefer: "sign in"
+      avoid: "login"
+
+# Validation overrides
+validation:
+  strict_mode: true
+  min_quality_score: 80
+  
+  required_sections:
+    - title
+    - overview
+    - prerequisites
+  
+  custom_rules:
+    - no_passive_voice
+    - consistent_terminology
+    - proper_code_formatting
+
+# Template preferences
+templates:
+  default: "standard"
+  available:
+    - standard
+    - tutorial
+    - api-reference
+    - troubleshooting
+
+# Metadata requirements
+metadata:
+  required:
+    - title
+    - author
+    - category
+    - version
+  
+  auto_generate:
+    - last_updated
+    - word_count
+    - reading_time
+
+# Publishing workflow
+workflow:
+  review_required: true
+  approval_required: true
+  reviewers:
+    - docs-team
+  
+  stages:
+    - validate
+    - review
+    - approve
+    - publish
+
+# Webhooks
+webhooks:
+  - event: "document.published"
+    url: "https://example-brand.com/webhooks/docs-published"
+  - event: "document.updated"
+    url: "https://example-brand.com/webhooks/docs-updated"
+
+# Integration settings
+integrations:
+  github:
+    enabled: true
+    org: "example-brand"
+    repo: "documentation"
+  
+  slack:
+    enabled: true
+    channel: "#documentation"
+  
+  analytics:
+    enabled: true
+    provider: "google-analytics"
+    tracking_id: "UA-XXXXXXXXX-X"

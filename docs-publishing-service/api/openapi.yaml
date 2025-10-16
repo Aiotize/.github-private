@@ -1,0 +1,551 @@
+openapi: 3.0.3
+info:
+  title: Documentation Publishing Service API
+  description: API for publishing and managing brand-endorsed documentation
+  version: 1.0.0
+  contact:
+    name: Documentation Team
+    email: docs@example.com
+
+servers:
+  - url: https://api.docs-publishing.example.com/v1
+    description: Production server
+  - url: https://api-staging.docs-publishing.example.com/v1
+    description: Staging server
+
+security:
+  - BearerAuth: []
+
+paths:
+  /publish:
+    post:
+      summary: Publish a document
+      operationId: publishDocument
+      tags:
+        - Documents
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PublishRequest'
+      responses:
+        '201':
+          description: Document published successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PublishResponse'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '422':
+          $ref: '#/components/responses/ValidationError'
+
+  /documents:
+    get:
+      summary: List documents
+      operationId: listDocuments
+      tags:
+        - Documents
+      parameters:
+        - name: brand
+          in: query
+          schema:
+            type: string
+        - name: category
+          in: query
+          schema:
+            type: string
+        - name: status
+          in: query
+          schema:
+            type: string
+            enum: [draft, published, archived]
+        - name: page
+          in: query
+          schema:
+            type: integer
+            default: 1
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            default: 20
+            maximum: 100
+      responses:
+        '200':
+          description: List of documents
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DocumentList'
+
+  /documents/{id}:
+    get:
+      summary: Get a document
+      operationId: getDocument
+      tags:
+        - Documents
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Document details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Document'
+        '404':
+          $ref: '#/components/responses/NotFound'
+
+    put:
+      summary: Update a document
+      operationId: updateDocument
+      tags:
+        - Documents
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PublishRequest'
+      responses:
+        '200':
+          description: Document updated successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PublishResponse'
+
+    delete:
+      summary: Delete a document
+      operationId: deleteDocument
+      tags:
+        - Documents
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Document deleted
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: string
+                  status:
+                    type: string
+                    enum: [deleted]
+
+  /validate:
+    post:
+      summary: Validate a document
+      operationId: validateDocument
+      tags:
+        - Validation
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ValidateRequest'
+      responses:
+        '200':
+          description: Validation result
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationResult'
+
+  /transform:
+    post:
+      summary: Transform a document
+      operationId: transformDocument
+      tags:
+        - Transform
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TransformRequest'
+      responses:
+        '200':
+          description: Transformed document
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TransformResponse'
+
+  /brands:
+    get:
+      summary: List available brands
+      operationId: listBrands
+      tags:
+        - Brands
+      responses:
+        '200':
+          description: List of brands
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BrandList'
+
+  /brands/{brand}/config:
+    get:
+      summary: Get brand configuration
+      operationId: getBrandConfig
+      tags:
+        - Brands
+      parameters:
+        - name: brand
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Brand configuration
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BrandConfig'
+
+components:
+  securitySchemes:
+    BearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+
+  schemas:
+    PublishRequest:
+      type: object
+      required:
+        - brand
+        - metadata
+      properties:
+        source:
+          type: string
+          description: Path or URL to source document
+        content:
+          type: string
+          description: Direct content (alternative to source)
+        format:
+          type: string
+          enum: [markdown, html, rst, asciidoc, latex]
+          default: markdown
+        brand:
+          type: string
+          description: Brand identifier
+        category:
+          type: string
+          description: Documentation category
+        metadata:
+          $ref: '#/components/schemas/DocumentMetadata'
+        options:
+          $ref: '#/components/schemas/PublishOptions'
+
+    PublishOptions:
+      type: object
+      properties:
+        validate:
+          type: boolean
+          default: true
+        transform:
+          type: boolean
+          default: true
+        publish:
+          type: boolean
+          default: true
+
+    DocumentMetadata:
+      type: object
+      required:
+        - title
+      properties:
+        title:
+          type: string
+        author:
+          type: string
+        version:
+          type: string
+        tags:
+          type: array
+          items:
+            type: string
+        description:
+          type: string
+
+    PublishResponse:
+      type: object
+      properties:
+        id:
+          type: string
+        status:
+          type: string
+          enum: [pending, processing, published, failed]
+        url:
+          type: string
+        validations:
+          $ref: '#/components/schemas/ValidationResult'
+        published_at:
+          type: string
+          format: date-time
+        version:
+          type: string
+
+    Document:
+      type: object
+      properties:
+        id:
+          type: string
+        title:
+          type: string
+        content:
+          type: string
+        format:
+          type: string
+        brand:
+          type: string
+        category:
+          type: string
+        metadata:
+          $ref: '#/components/schemas/DocumentMetadata'
+        status:
+          type: string
+        created_at:
+          type: string
+          format: date-time
+        updated_at:
+          type: string
+          format: date-time
+        published_at:
+          type: string
+          format: date-time
+        version:
+          type: string
+
+    DocumentList:
+      type: object
+      properties:
+        documents:
+          type: array
+          items:
+            type: object
+            properties:
+              id:
+                type: string
+              title:
+                type: string
+              brand:
+                type: string
+              category:
+                type: string
+              status:
+                type: string
+              published_at:
+                type: string
+                format: date-time
+        pagination:
+          $ref: '#/components/schemas/Pagination'
+
+    Pagination:
+      type: object
+      properties:
+        page:
+          type: integer
+        limit:
+          type: integer
+        total:
+          type: integer
+        pages:
+          type: integer
+
+    ValidateRequest:
+      type: object
+      required:
+        - content
+        - brand
+      properties:
+        content:
+          type: string
+        format:
+          type: string
+          default: markdown
+        brand:
+          type: string
+        rules:
+          type: array
+          items:
+            type: string
+
+    ValidationResult:
+      type: object
+      properties:
+        valid:
+          type: boolean
+        errors:
+          type: array
+          items:
+            $ref: '#/components/schemas/ValidationError'
+        warnings:
+          type: array
+          items:
+            $ref: '#/components/schemas/ValidationError'
+        score:
+          type: number
+          minimum: 0
+          maximum: 100
+
+    ValidationError:
+      type: object
+      properties:
+        line:
+          type: integer
+        column:
+          type: integer
+        message:
+          type: string
+        rule:
+          type: string
+        severity:
+          type: string
+          enum: [error, warning, info]
+
+    TransformRequest:
+      type: object
+      required:
+        - content
+        - from
+        - to
+      properties:
+        content:
+          type: string
+        from:
+          type: string
+          enum: [markdown, html, rst, asciidoc, latex]
+        to:
+          type: string
+          enum: [markdown, html, rst, asciidoc, latex, pdf]
+        options:
+          type: object
+          properties:
+            brand:
+              type: string
+            apply_styles:
+              type: boolean
+            include_toc:
+              type: boolean
+
+    TransformResponse:
+      type: object
+      properties:
+        content:
+          type: string
+        format:
+          type: string
+        metadata:
+          type: object
+
+    BrandList:
+      type: object
+      properties:
+        brands:
+          type: array
+          items:
+            type: object
+            properties:
+              id:
+                type: string
+              name:
+                type: string
+              description:
+                type: string
+              categories:
+                type: array
+                items:
+                  type: string
+              formats:
+                type: array
+                items:
+                  type: string
+
+    BrandConfig:
+      type: object
+      properties:
+        brand:
+          type: string
+        styles:
+          type: object
+        validation_rules:
+          type: array
+          items:
+            type: string
+        templates:
+          type: array
+          items:
+            type: string
+        categories:
+          type: array
+          items:
+            type: string
+
+    Error:
+      type: object
+      properties:
+        error:
+          type: object
+          properties:
+            code:
+              type: string
+            message:
+              type: string
+            details:
+              type: object
+
+  responses:
+    BadRequest:
+      description: Bad request
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    
+    Unauthorized:
+      description: Unauthorized
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    
+    NotFound:
+      description: Not found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    
+    ValidationError:
+      description: Validation error
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
