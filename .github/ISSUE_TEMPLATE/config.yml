@@ -1,0 +1,21 @@
+# Issue Template Configuration
+# Metadata:
+# - Author: Aiotize Organization
+# - Version: 1.0.0
+# - Last Updated: 2025-10-16
+# - Purpose: Configure issue template chooser
+
+blank_issues_enabled: false
+
+contact_links:
+  - name: 💬 GitHub Discussions
+    url: https://github.com/orgs/Aiotize/discussions
+    about: Ask questions and discuss ideas with the community
+    
+  - name: 📖 Documentation
+    url: https://github.com/Aiotize
+    about: Check our documentation for guides and API references
+    
+  - name: 🔒 Security Issue
+    url: https://github.com/Aiotize/.github-private/security/advisories/new
+    about: Report security vulnerabilities privately (DO NOT create public issues)

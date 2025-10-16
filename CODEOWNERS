@@ -1,0 +1,23 @@
+# CODEOWNERS
+# 
+# This file defines the code owners for this repository.
+# Code owners are automatically requested for review when someone opens a pull request.
+#
+# Metadata:
+# - Author: Aiotize Organization
+# - Last Updated: 2025-10-16
+# - Purpose: Define repository ownership and review requirements
+# - Format: CODEOWNERS syntax (GitHub standard)
+
+# Default owners for everything in the repo
+* @Aiotize/maintainers
+
+# Specific ownership for security-related files
+SECURITY.md @Aiotize/security-team
+
+# Specific ownership for community health files
+CODE_OF_CONDUCT.md @Aiotize/community-team
+CONTRIBUTING.md @Aiotize/community-team
+
+# Workflow and configuration files
+.github/ @Aiotize/devops-team
