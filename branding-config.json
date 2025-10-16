@@ -1,0 +1,402 @@
+{
+  "organization": "Aiotize",
+  "version": "1.0.0",
+  "themes": {
+    "light": {
+      "name": "Light Theme",
+      "colors": {
+        "primary": "#0066CC",
+        "secondary": "#4A90E2",
+        "accent": "#00A3E0",
+        "background": "#FFFFFF",
+        "surface": "#F5F5F5",
+        "text": {
+          "primary": "#212121",
+          "secondary": "#757575",
+          "disabled": "#BDBDBD"
+        },
+        "success": "#4CAF50",
+        "warning": "#FF9800",
+        "error": "#F44336",
+        "info": "#2196F3"
+      }
+    },
+    "dark": {
+      "name": "Dark Theme",
+      "colors": {
+        "primary": "#60A5FA",
+        "secondary": "#93C5FD",
+        "accent": "#38BDF8",
+        "background": "#1A1A1A",
+        "surface": "#2D2D2D",
+        "text": {
+          "primary": "#FFFFFF",
+          "secondary": "#B0B0B0",
+          "disabled": "#666666"
+        },
+        "success": "#66BB6A",
+        "warning": "#FFA726",
+        "error": "#EF5350",
+        "info": "#42A5F5"
+      }
+    },
+    "custom": {
+      "name": "Custom Brand Theme",
+      "colors": {
+        "primary": "#1E40AF",
+        "secondary": "#3B82F6",
+        "accent": "#06B6D4",
+        "background": "#F9FAFB",
+        "surface": "#FFFFFF",
+        "text": {
+          "primary": "#111827",
+          "secondary": "#6B7280",
+          "disabled": "#9CA3AF"
+        },
+        "success": "#10B981",
+        "warning": "#F59E0B",
+        "error": "#EF4444",
+        "info": "#3B82F6"
+      }
+    }
+  },
+  "colorPalettes": {
+    "brand": {
+      "primary": ["#0A2463", "#1E40AF", "#3B82F6", "#60A5FA", "#93C5FD"],
+      "secondary": ["#065F46", "#047857", "#10B981", "#34D399", "#6EE7B7"],
+      "neutral": ["#1F2937", "#4B5563", "#6B7280", "#9CA3AF", "#D1D5DB", "#E5E7EB", "#F3F4F6", "#F9FAFB"]
+    },
+    "semantic": {
+      "success": ["#064E3B", "#065F46", "#047857", "#059669", "#10B981"],
+      "warning": ["#78350F", "#92400E", "#B45309", "#D97706", "#F59E0B"],
+      "error": ["#7F1D1D", "#991B1B", "#B91C1C", "#DC2626", "#EF4444"],
+      "info": ["#1E3A8A", "#1E40AF", "#2563EB", "#3B82F6", "#60A5FA"]
+    }
+  },
+  "typography": {
+    "fontFamilies": {
+      "primary": "Inter, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif",
+      "secondary": "Georgia, 'Times New Roman', serif",
+      "monospace": "'Fira Code', 'Courier New', monospace",
+      "display": "'Montserrat', 'Helvetica Neue', sans-serif"
+    },
+    "fontSizes": {
+      "xs": "0.75rem",
+      "sm": "0.875rem",
+      "base": "1rem",
+      "lg": "1.125rem",
+      "xl": "1.25rem",
+      "2xl": "1.5rem",
+      "3xl": "1.875rem",
+      "4xl": "2.25rem",
+      "5xl": "3rem",
+      "6xl": "3.75rem"
+    },
+    "fontWeights": {
+      "light": 300,
+      "normal": 400,
+      "medium": 500,
+      "semibold": 600,
+      "bold": 700,
+      "extrabold": 800
+    },
+    "lineHeights": {
+      "tight": 1.25,
+      "normal": 1.5,
+      "relaxed": 1.75,
+      "loose": 2
+    },
+    "headings": {
+      "h1": {
+        "fontSize": "3rem",
+        "fontWeight": 700,
+        "lineHeight": 1.2,
+        "letterSpacing": "-0.02em",
+        "marginTop": "0",
+        "marginBottom": "1.5rem",
+        "fontFamily": "display"
+      },
+      "h2": {
+        "fontSize": "2.25rem",
+        "fontWeight": 600,
+        "lineHeight": 1.3,
+        "letterSpacing": "-0.01em",
+        "marginTop": "2rem",
+        "marginBottom": "1rem",
+        "fontFamily": "display"
+      },
+      "h3": {
+        "fontSize": "1.875rem",
+        "fontWeight": 600,
+        "lineHeight": 1.4,
+        "letterSpacing": "0",
+        "marginTop": "1.5rem",
+        "marginBottom": "0.75rem",
+        "fontFamily": "primary"
+      },
+      "h4": {
+        "fontSize": "1.5rem",
+        "fontWeight": 600,
+        "lineHeight": 1.4,
+        "marginTop": "1.25rem",
+        "marginBottom": "0.5rem",
+        "fontFamily": "primary"
+      },
+      "h5": {
+        "fontSize": "1.25rem",
+        "fontWeight": 500,
+        "lineHeight": 1.5,
+        "marginTop": "1rem",
+        "marginBottom": "0.5rem",
+        "fontFamily": "primary"
+      },
+      "h6": {
+        "fontSize": "1rem",
+        "fontWeight": 500,
+        "lineHeight": 1.5,
+        "marginTop": "1rem",
+        "marginBottom": "0.5rem",
+        "fontFamily": "primary"
+      }
+    }
+  },
+  "spacing": {
+    "unit": "0.25rem",
+    "scale": {
+      "0": "0",
+      "1": "0.25rem",
+      "2": "0.5rem",
+      "3": "0.75rem",
+      "4": "1rem",
+      "5": "1.25rem",
+      "6": "1.5rem",
+      "8": "2rem",
+      "10": "2.5rem",
+      "12": "3rem",
+      "16": "4rem",
+      "20": "5rem",
+      "24": "6rem",
+      "32": "8rem"
+    }
+  },
+  "layout": {
+    "containers": {
+      "sm": "640px",
+      "md": "768px",
+      "lg": "1024px",
+      "xl": "1280px",
+      "2xl": "1536px"
+    },
+    "margins": {
+      "page": {
+        "top": "3rem",
+        "right": "2rem",
+        "bottom": "3rem",
+        "left": "2rem"
+      },
+      "section": {
+        "top": "2rem",
+        "bottom": "2rem"
+      },
+      "content": {
+        "top": "1rem",
+        "bottom": "1rem"
+      }
+    },
+    "padding": {
+      "page": "1.5rem",
+      "section": "1rem",
+      "card": "1.5rem",
+      "button": {
+        "vertical": "0.5rem",
+        "horizontal": "1rem"
+      }
+    },
+    "header": {
+      "height": "4rem",
+      "padding": "1rem 2rem",
+      "backgroundColor": "surface",
+      "borderBottom": "1px solid",
+      "borderColor": "rgba(0, 0, 0, 0.1)",
+      "position": "sticky",
+      "top": 0,
+      "zIndex": 1000
+    },
+    "footer": {
+      "height": "auto",
+      "minHeight": "6rem",
+      "padding": "2rem",
+      "backgroundColor": "surface",
+      "borderTop": "1px solid",
+      "borderColor": "rgba(0, 0, 0, 0.1)"
+    }
+  },
+  "hyperlinks": {
+    "style": {
+      "color": "primary",
+      "textDecoration": "underline",
+      "textDecorationColor": "rgba(0, 102, 204, 0.3)",
+      "textDecorationThickness": "1px",
+      "textUnderlineOffset": "2px"
+    },
+    "hover": {
+      "color": "secondary",
+      "textDecoration": "underline",
+      "textDecorationColor": "rgba(74, 144, 226, 0.5)"
+    },
+    "visited": {
+      "color": "#5B21B6",
+      "textDecoration": "underline"
+    },
+    "active": {
+      "color": "accent"
+    }
+  },
+  "numbering": {
+    "lists": {
+      "ordered": {
+        "style": "decimal",
+        "marginLeft": "1.5rem",
+        "paddingLeft": "0.5rem"
+      },
+      "unordered": {
+        "style": "disc",
+        "marginLeft": "1.5rem",
+        "paddingLeft": "0.5rem"
+      }
+    },
+    "headings": {
+      "enabled": true,
+      "format": "{chapter}.{section}.{subsection}",
+      "separator": ".",
+      "prefix": "",
+      "suffix": ""
+    },
+    "figures": {
+      "enabled": true,
+      "format": "Figure {number}",
+      "prefix": "Fig. ",
+      "suffix": ""
+    },
+    "tables": {
+      "enabled": true,
+      "format": "Table {number}",
+      "prefix": "Table ",
+      "suffix": ""
+    }
+  },
+  "imagery": {
+    "parameters": {
+      "lens": {
+        "standard": {
+          "focalLength": "50mm",
+          "aperture": "f/5.6",
+          "perspective": "natural",
+          "distortion": "minimal"
+        },
+        "wide": {
+          "focalLength": "24mm",
+          "aperture": "f/8",
+          "perspective": "expansive",
+          "distortion": "controlled"
+        },
+        "telephoto": {
+          "focalLength": "85mm",
+          "aperture": "f/2.8",
+          "perspective": "compressed",
+          "distortion": "none"
+        }
+      },
+      "tone": {
+        "professional": {
+          "contrast": "medium",
+          "saturation": "85%",
+          "brightness": "neutral",
+          "mood": "confident"
+        },
+        "friendly": {
+          "contrast": "low",
+          "saturation": "95%",
+          "brightness": "bright",
+          "mood": "approachable"
+        },
+        "dramatic": {
+          "contrast": "high",
+          "saturation": "75%",
+          "brightness": "varied",
+          "mood": "impactful"
+        }
+      },
+      "warmth": {
+        "cool": {
+          "temperature": "6500K",
+          "tint": "blue",
+          "usage": "technology, modern"
+        },
+        "neutral": {
+          "temperature": "5500K",
+          "tint": "balanced",
+          "usage": "general, versatile"
+        },
+        "warm": {
+          "temperature": "3200K",
+          "tint": "orange",
+          "usage": "comfort, trust"
+        }
+      }
+    },
+    "guidelines": {
+      "aspectRatios": {
+        "hero": "16:9",
+        "thumbnail": "4:3",
+        "portrait": "3:4",
+        "square": "1:1",
+        "wide": "21:9"
+      },
+      "formats": {
+        "web": ["jpg", "png", "webp", "svg"],
+        "print": ["tiff", "pdf", "eps"],
+        "social": ["jpg", "png"]
+      },
+      "resolution": {
+        "web": "72dpi",
+        "print": "300dpi",
+        "retina": "144dpi"
+      },
+      "optimization": {
+        "maxFileSize": "500KB",
+        "compression": "80%",
+        "lazyLoad": true
+      }
+    },
+    "brandStyle": {
+      "composition": "rule of thirds",
+      "lighting": "natural, soft",
+      "colorGrading": "consistent with brand palette",
+      "subjects": "diverse, inclusive",
+      "backgrounds": "clean, uncluttered"
+    }
+  },
+  "topicChronology": {
+    "structure": {
+      "introduction": {
+        "order": 1,
+        "elements": ["overview", "objectives", "scope"]
+      },
+      "mainContent": {
+        "order": 2,
+        "elements": ["context", "details", "examples", "analysis"]
+      },
+      "conclusion": {
+        "order": 3,
+        "elements": ["summary", "takeaways", "nextSteps"]
+      }
+    },
+    "navigation": {
+      "breadcrumbs": true,
+      "pagination": true,
+      "tableOfContents": true,
+      "progressIndicator": true
+    }
+  }
+}
