@@ -36,12 +36,17 @@ Version: 1.0.0
 
 | Field | Required | Format | Example |
 |-------|----------|--------|---------|
-| Author | Yes | Text | Aiotize Organization |
+| Author | Yes | Text (Org/Team/Name) | Aiotize Organization |
 | Created | Yes | YYYY-MM-DD | 2025-10-16 |
 | Last Modified | Yes | YYYY-MM-DD | 2025-10-16 |
 | Version | Recommended | X.Y.Z | 1.0.0 |
-| Purpose | Recommended | Text | Brief description |
-| License | For code | Text | MIT |
+| Purpose | Recommended | 1-2 sentence summary | Brief description of file's role |
+| License | For code | SPDX identifier | MIT |
+
+**Notes:**
+- **Author**: Can be organization name, team name, or individual. For multiple authors, use "Author1, Author2" or "Team Name"
+- **Purpose**: Keep to 1-2 sentences describing what the file does or contains
+- **Multiple contributors**: Track via git history; Author field shows primary/initial author
 
 ### Standard Text Sizes
 
@@ -97,8 +102,12 @@ Tertiary:  #b1bac4 (gray-300) - Ratio: 9:1    ✓
 
 ### File Naming Conventions
 
+**For standard GitHub files (use uppercase):**
+- ✓ `README.md`, `LICENSE`, `CONTRIBUTING.md`, `CODEOWNERS`
+
+**For custom/regular files (use lowercase with hyphens):**
 - ✓ Use lowercase: `my-file.md`
-- ✓ Use hyphens: `user-guide.md`
+- ✓ Use hyphens for spaces: `user-guide.md`
 - ✓ Be descriptive: `authentication-guide.md`
 - ✗ Avoid: `MyFile.md`, `user_guide.md`, `auth.md`
 
@@ -161,6 +170,8 @@ Closes #123
 - [ ] Content readable without CSS
 
 ### Template Files Created
+
+**Note:** All files listed below are part of this repository and are included in this PR.
 
 This repository includes the following templates:
 
