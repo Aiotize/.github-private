@@ -1,0 +1,223 @@
+# Validation Rules for Example Brand
+
+# General validation settings
+validation:
+  strict: true
+  fail_on_warnings: false
+  min_quality_score: 80
+
+# Content structure rules
+structure:
+  required_sections:
+    - name: "Title"
+      pattern: "^# .+"
+      description: "Document must have a level 1 heading"
+    
+    - name: "Overview"
+      keywords: ["overview", "introduction", "about"]
+      description: "Document should include an overview section"
+    
+    - name: "Prerequisites"
+      keywords: ["prerequisites", "requirements", "before you begin"]
+      description: "Document should list prerequisites if applicable"
+      optional: true
+
+  section_order:
+    - title
+    - overview
+    - prerequisites
+    - content
+    - next_steps
+    - related
+
+# Content quality rules
+quality:
+  # Minimum content length
+  min_words: 100
+  max_words: 10000
+  
+  # Reading level
+  readability:
+    enabled: true
+    target_score: 60  # Flesch reading ease
+    max_grade_level: 12
+  
+  # Spelling and grammar
+  spelling:
+    enabled: true
+    dictionary: "en_US"
+    custom_words:
+      - "Example Brand"
+      - "ExampleBrand"
+  
+  grammar:
+    enabled: true
+    check_passive_voice: true
+    max_passive_percentage: 10
+
+# Formatting rules
+formatting:
+  # Headings
+  headings:
+    max_length: 80
+    capitalization: "title"  # title, sentence, lower, upper
+    no_trailing_punctuation: true
+    sequential_levels: true  # No skipping heading levels
+  
+  # Lists
+  lists:
+    consistent_markers: true
+    proper_indentation: true
+  
+  # Code blocks
+  code_blocks:
+    require_language: true
+    max_length: 50  # lines
+  
+  # Links
+  links:
+    check_validity: true
+    no_broken_links: true
+    prefer_https: true
+    require_title: false
+  
+  # Images
+  images:
+    require_alt_text: true
+    check_existence: true
+    max_size: "2MB"
+    allowed_formats: ["png", "jpg", "jpeg", "gif", "svg"]
+
+# Style guide rules
+style:
+  # Tone and voice
+  tone:
+    - rule: "use_active_voice"
+      description: "Prefer active voice over passive voice"
+      severity: "warning"
+    
+    - rule: "second_person"
+      description: "Use second person (you) instead of third person (the user)"
+      severity: "warning"
+    
+    - rule: "present_tense"
+      description: "Use present tense when possible"
+      severity: "info"
+  
+  # Word choice
+  word_choice:
+    forbidden_words:
+      - word: "simply"
+        reason: "Implies something is easy, which may not be true for all users"
+      - word: "just"
+        reason: "Can be condescending"
+      - word: "obviously"
+        reason: "Assumes knowledge"
+      - word: "easy"
+        reason: "Subjective and potentially discouraging"
+    
+    preferred_terms:
+      - prefer: "click"
+        avoid: "click on"
+      - prefer: "sign in"
+        avoid: ["login", "log in"]
+      - prefer: "user name"
+        avoid: "username"
+      - prefer: "email"
+        avoid: "e-mail"
+  
+  # Punctuation
+  punctuation:
+    oxford_comma: true
+    space_after_period: 1
+    no_multiple_punctuation: true
+    consistent_quotes: "double"  # double or single
+
+# Technical accuracy rules
+technical:
+  # Code examples
+  code_examples:
+    require_testing: false
+    include_comments: true
+    follow_style_guide: true
+  
+  # API references
+  api_references:
+    include_parameters: true
+    include_return_values: true
+    include_examples: true
+  
+  # Version information
+  versioning:
+    include_version: true
+    date_format: "YYYY-MM-DD"
+
+# Accessibility rules
+accessibility:
+  # Alt text for images
+  images:
+    require_alt: true
+    alt_max_length: 150
+  
+  # Link text
+  links:
+    descriptive_text: true
+    no_click_here: true
+  
+  # Color contrast
+  colors:
+    check_contrast: true
+    min_contrast_ratio: 4.5
+
+# Brand-specific rules
+brand:
+  # Terminology
+  terminology:
+    - term: "Example Brand"
+      description: "Always capitalize both words"
+      pattern: "Example Brand"
+      incorrect: ["example brand", "Example brand", "example Brand"]
+  
+  # Product names
+  products:
+    - name: "Example Product"
+      description: "Official product name"
+      always_capitalize: true
+  
+  # Trademark usage
+  trademarks:
+    include_symbol: true
+    first_use_only: true
+
+# Custom validation rules
+custom_rules:
+  - id: "no-lorem-ipsum"
+    pattern: "lorem ipsum"
+    message: "Remove placeholder text"
+    severity: "error"
+  
+  - id: "no-todo"
+    pattern: "TODO|FIXME|XXX"
+    message: "Resolve all TODO comments before publishing"
+    severity: "error"
+  
+  - id: "proper-date-format"
+    pattern: '\d{4}-\d{2}-\d{2}'
+    message: "Use ISO date format (YYYY-MM-DD)"
+    severity: "warning"
+
+# Exceptions
+exceptions:
+  # Files or sections that skip certain rules
+  skip_validation:
+    - path: "examples/**"
+      rules: ["min_words", "readability"]
+    
+    - path: "api-reference/**"
+      rules: ["tone", "word_choice"]
+
+# Reporting
+reporting:
+  format: "detailed"  # detailed, summary, json
+  include_suggestions: true
+  group_by_severity: true

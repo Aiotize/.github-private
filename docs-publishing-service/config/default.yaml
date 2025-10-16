@@ -1,0 +1,160 @@
+# Default Configuration for Documentation Publishing Service
+
+service:
+  name: "Documentation Publishing Service"
+  version: "1.0.0"
+  api_version: "v1"
+
+# Server settings
+server:
+  host: "0.0.0.0"
+  port: 8080
+  timeout: 30s
+  max_request_size: 10MB
+
+# Publishing defaults
+publishing:
+  default_format: markdown
+  supported_formats:
+    - markdown
+    - html
+    - rst
+    - asciidoc
+    - latex
+  
+  output_formats:
+    - html
+    - pdf
+    - markdown
+  
+  default_options:
+    validate: true
+    transform: true
+    publish: true
+    include_toc: true
+    apply_styles: true
+
+# Validation defaults
+validation:
+  enabled: true
+  strict_mode: false
+  min_quality_score: 70
+  
+  default_rules:
+    - spelling
+    - grammar
+    - formatting
+    - structure
+    - links
+    - images
+  
+  max_errors: 50
+  max_warnings: 100
+
+# Storage settings
+storage:
+  type: "filesystem"  # or "s3", "gcs", "azure"
+  base_path: "./published-docs"
+  versioning: true
+  retention_days: 365
+
+# Cache settings
+cache:
+  enabled: true
+  ttl: 3600
+  max_size: 1GB
+
+# Rate limiting
+rate_limit:
+  enabled: true
+  requests_per_minute: 100
+  burst: 20
+
+# Logging
+logging:
+  level: "info"  # debug, info, warn, error
+  format: "json"
+  output: "stdout"
+
+# Authentication
+authentication:
+  type: "bearer"  # bearer, api_key, oauth2
+  token_expiry: 3600
+
+# Webhook settings
+webhooks:
+  enabled: true
+  retry_attempts: 3
+  retry_delay: 5s
+  timeout: 10s
+
+# Transformation settings
+transformation:
+  pandoc:
+    enabled: true
+    version: "latest"
+  
+  markdown:
+    flavor: "gfm"  # GitHub Flavored Markdown
+    extensions:
+      - tables
+      - strikethrough
+      - task_lists
+      - autolinks
+  
+  html:
+    sanitize: true
+    allow_unsafe: false
+
+# Template settings
+templates:
+  enabled: true
+  directory: "./templates"
+  cache_templates: true
+
+# Metadata defaults
+metadata:
+  required_fields:
+    - title
+    - author
+  
+  optional_fields:
+    - description
+    - tags
+    - version
+    - category
+    - last_updated
+
+# Categories
+categories:
+  - guides
+  - tutorials
+  - reference
+  - api
+  - concepts
+  - troubleshooting
+  - best-practices
+  - release-notes
+
+# Quality checks
+quality:
+  min_words: 100
+  max_words: 10000
+  readability_score: 60
+  check_broken_links: true
+  check_images: true
+  check_code_blocks: true
+
+# Notification settings
+notifications:
+  enabled: true
+  channels:
+    - email
+    - webhook
+  
+  events:
+    - document_published
+    - document_updated
+    - document_deleted
+    - validation_failed
+    - transform_failed
