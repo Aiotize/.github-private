@@ -112,7 +112,12 @@ class DocsPublishingClient:
         if not path.exists():
             raise FileNotFoundError(f"File not found: {file_path}")
 
-        content = path.read_text(encoding="utf-8")
+        try:
+            content = path.read_text(encoding="utf-8")
+        except UnicodeDecodeError as e:
+            raise ValueError(
+                f"Failed to read file {file_path}: Invalid UTF-8 encoding"
+            ) from e
         file_metadata = self._extract_frontmatter(content)
 
         # Merge metadata
@@ -330,12 +335,17 @@ class DocsPublishingClient:
     def _extract_frontmatter(content: str) -> Dict[str, str]:
         """
         Extract YAML frontmatter from content.
+        
+        NOTE: This is a simplified parser for demonstration.
+        For production use, install and use a proper YAML parser:
+            pip install pyyaml
+        Then use: yaml.safe_load(frontmatter)
 
         Args:
             content: Document content
 
         Returns:
-            Dictionary with frontmatter key-value pairs
+            Dictionary with frontmatter key-value pairs (simple values only)
         """
         pattern = r"^---\n(.*?)\n---"
         match = re.search(pattern, content, re.DOTALL)
@@ -346,10 +356,18 @@ class DocsPublishingClient:
         frontmatter = match.group(1)
         metadata = {}
 
+        # Simple parser for basic key-value pairs only
+        # Does not handle arrays, nested objects, or multi-line values
         for line in frontmatter.split("\n"):
-            if ":" in line:
+            line = line.strip()
+            if ":" in line and not line.startswith("#"):
                 key, value = line.split(":", 1)
-                metadata[key.strip()] = value.strip().strip('"\'')
+                value = value.strip()
+                # Remove surrounding quotes if present
+                if (value.startswith('"') and value.endswith('"')) or \
+                   (value.startswith("'") and value.endswith("'")):
+                    value = value[1:-1]
+                metadata[key.strip()] = value
 
         return metadata
 

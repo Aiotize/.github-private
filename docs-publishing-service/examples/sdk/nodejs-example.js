@@ -55,7 +55,12 @@ class DocsPublishingClient {
    * Publish from a file
    */
   async publishFile(filePath, options = {}) {
-    const content = await fs.readFile(filePath, 'utf-8');
+    let content;
+    try {
+      content = await fs.readFile(filePath, 'utf-8');
+    } catch (error) {
+      throw new Error(`Failed to read file ${filePath}: ${error.message}`);
+    }
     const fileName = path.basename(filePath, path.extname(filePath));
     
     // Extract metadata from frontmatter if present
@@ -201,6 +206,11 @@ class DocsPublishingClient {
 
   /**
    * Extract frontmatter from markdown content
+   * 
+   * NOTE: This is a simplified parser for demonstration.
+   * For production use, install and use a proper YAML parser:
+   *   npm install js-yaml
+   * Then use: const yaml = require('js-yaml'); yaml.load(frontmatter);
    */
   extractFrontmatter(content) {
     const frontmatterRegex = /^---\n([\s\S]*?)\n---/;
@@ -211,13 +221,19 @@ class DocsPublishingClient {
     const frontmatter = match[1];
     const metadata = {};
     
-    // Simple YAML parser for basic key-value pairs
+    // Simple YAML parser for basic key-value pairs only
+    // Does not handle arrays, nested objects, or multi-line values
     const lines = frontmatter.split('\n');
     lines.forEach(line => {
       const colonIndex = line.indexOf(':');
-      if (colonIndex > 0) {
+      if (colonIndex > 0 && !line.trim().startsWith('#')) {
         const key = line.substring(0, colonIndex).trim();
-        const value = line.substring(colonIndex + 1).trim().replace(/^["']|["']$/g, '');
+        let value = line.substring(colonIndex + 1).trim();
+        // Remove surrounding quotes if present
+        if ((value.startsWith('"') && value.endsWith('"')) || 
+            (value.startsWith("'") && value.endsWith("'"))) {
+          value = value.substring(1, value.length - 1);
+        }
         metadata[key] = value;
       }
     });
