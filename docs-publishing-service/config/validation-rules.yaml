@@ -1,0 +1,241 @@
+# Global Validation Rules
+# These rules apply to all documentation unless overridden by brand-specific rules
+
+# Metadata validation
+metadata:
+  required_fields:
+    - title
+    - author
+  
+  optional_fields:
+    - description
+    - version
+    - category
+    - tags
+    - date
+    - status
+  
+  field_constraints:
+    title:
+      min_length: 5
+      max_length: 200
+      pattern: "^[A-Za-z0-9][A-Za-z0-9\\s:_-]*$"
+    
+    author:
+      min_length: 2
+      max_length: 100
+    
+    version:
+      pattern: "^\\d+\\.\\d+\\.\\d+$"  # Semantic versioning
+    
+    status:
+      allowed_values: [draft, review, published, archived]
+
+# Document structure rules
+structure:
+  required_elements:
+    - heading_level_1
+    - content_paragraphs
+  
+  heading_rules:
+    start_with_h1: true
+    no_skip_levels: true
+    max_depth: 6
+    min_words_between: 20
+  
+  section_rules:
+    min_sections: 2
+    recommended_sections:
+      - overview
+      - prerequisites
+      - examples
+      - next-steps
+
+# Content quality rules
+content:
+  length:
+    min_words: 100
+    max_words: 10000
+    recommended_min: 300
+  
+  readability:
+    min_flesch_score: 50
+    max_grade_level: 12
+    check_enabled: true
+  
+  paragraphs:
+    min_words: 10
+    max_words: 150
+    recommended_max: 100
+  
+  sentences:
+    max_length: 40  # words
+    check_passive_voice: true
+    max_passive_percentage: 20
+
+# Formatting rules
+formatting:
+  headings:
+    max_length: 80
+    no_trailing_punctuation: true
+    capitalization: "sentence"  # sentence, title, lower, upper
+  
+  lists:
+    consistent_bullets: true
+    max_items: 20
+    min_items: 2
+  
+  code_blocks:
+    require_language_tag: true
+    max_lines: 50
+    proper_indentation: true
+  
+  links:
+    check_validity: true
+    prefer_https: true
+    no_broken_links: true
+    descriptive_text: true
+    max_consecutive: 5
+  
+  images:
+    require_alt_text: true
+    max_size_mb: 5
+    allowed_formats: [png, jpg, jpeg, gif, svg, webp]
+    check_existence: true
+
+# Style rules
+style:
+  tone:
+    check_active_voice: true
+    check_second_person: true
+    check_present_tense: true
+  
+  word_choice:
+    avoid_jargon: true
+    check_spelling: true
+    dictionary: "en_US"
+    
+    forbidden_phrases:
+      - "click here"
+      - "read more"
+      - "obviously"
+      - "simply"
+      - "just"
+      - "easy"
+      - "trivial"
+    
+    gender_neutral: true
+    inclusive_language: true
+  
+  punctuation:
+    oxford_comma: true
+    consistent_quotes: "double"
+    no_multiple_punctuation: true
+    no_multiple_spaces: true
+
+# Technical accuracy rules
+technical:
+  code_examples:
+    syntax_check: true
+    include_language: true
+    no_placeholder_code: true
+    forbidden_patterns:
+      - "TODO"
+      - "FIXME"
+      - "XXX"
+      - "lorem ipsum"
+  
+  urls:
+    check_reachability: false  # Can be slow, enable per-brand
+    check_https: true
+    no_localhost: true
+    no_internal_ips: true
+  
+  version_references:
+    check_currency: true
+    warn_old_versions: true
+
+# Accessibility rules
+accessibility:
+  images:
+    require_alt: true
+    alt_min_length: 5
+    alt_max_length: 150
+    no_redundant_text: true  # e.g., "image of..."
+  
+  links:
+    descriptive_text: true
+    no_url_as_text: true
+  
+  tables:
+    require_headers: true
+    max_columns: 10
+    caption_recommended: true
+  
+  colors:
+    check_contrast: false  # Complex to implement
+    contrast_ratio: 4.5
+
+# File rules
+file:
+  naming:
+    lowercase: true
+    no_spaces: true
+    allowed_chars: "a-z0-9-_"
+    max_length: 100
+  
+  size:
+    max_size_mb: 10
+    warn_size_mb: 5
+  
+  encoding:
+    required: "utf-8"
+
+# Link checking rules
+links:
+  check_internal: true
+  check_external: false  # Can be slow
+  check_anchors: true
+  follow_redirects: true
+  timeout_seconds: 10
+
+# Warning thresholds
+thresholds:
+  quality_score:
+    excellent: 90
+    good: 75
+    acceptable: 60
+    poor: 50
+  
+  max_errors: 10
+  max_warnings: 25
+
+# Severity levels
+severity:
+  missing_required_metadata: error
+  missing_optional_metadata: warning
+  heading_skip_level: error
+  broken_link: error
+  missing_alt_text: warning
+  long_sentence: warning
+  passive_voice: info
+  spelling_error: warning
+  grammar_error: warning
+  readability_low: warning
+  placeholder_content: error
+
+# Reporting
+reporting:
+  format: "detailed"  # minimal, detailed, json
+  include_line_numbers: true
+  include_suggestions: true
+  group_by_severity: true
+  show_rule_id: true
+
+# Performance
+performance:
+  max_processing_time_seconds: 60
+  enable_caching: true
+  cache_ttl_seconds: 3600
+  parallel_validation: true
+  max_concurrent_checks: 5
