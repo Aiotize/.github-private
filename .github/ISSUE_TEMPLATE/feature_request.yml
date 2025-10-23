@@ -1,0 +1,148 @@
+name: Feature Request
+description: Suggest a new feature or enhancement
+title: "[Feature]: "
+labels: ["enhancement", "needs-review"]
+assignees:
+  - Aiotize/maintainers
+
+# Metadata
+# Author: Aiotize Organization
+# Version: 1.0.0
+# Last Updated: 2025-10-16
+# Purpose: Standardized feature request template
+
+body:
+  - type: markdown
+    attributes:
+      value: |
+        ## Feature Request
+        
+        Thank you for suggesting a new feature! Your input helps us improve.
+        
+        **Guidelines:**
+        - Be clear and specific about the feature
+        - Explain the use case and benefits
+        - Use standard formatting for better readability
+        
+  - type: input
+    id: title
+    attributes:
+      label: Feature Title
+      description: A clear, concise title for the feature
+      placeholder: Brief title describing the feature
+    validations:
+      required: true
+
+  - type: textarea
+    id: problem
+    attributes:
+      label: Problem Statement
+      description: What problem does this feature solve?
+      placeholder: |
+        Describe the problem or limitation you're experiencing.
+        Is your feature request related to a problem?
+    validations:
+      required: true
+
+  - type: textarea
+    id: solution
+    attributes:
+      label: Proposed Solution
+      description: How should this feature work?
+      placeholder: |
+        Describe your proposed solution in detail.
+        How would this feature work?
+        What would the user experience be?
+    validations:
+      required: true
+
+  - type: textarea
+    id: alternatives
+    attributes:
+      label: Alternatives Considered
+      description: What alternative solutions have you considered?
+      placeholder: |
+        Describe any alternative solutions or workarounds you've considered.
+        Why is your proposed solution better?
+
+  - type: dropdown
+    id: priority
+    attributes:
+      label: Priority
+      description: How important is this feature to you?
+      options:
+        - Low - Nice to have
+        - Medium - Would improve experience
+        - High - Critical for my use case
+    validations:
+      required: true
+
+  - type: textarea
+    id: use-cases
+    attributes:
+      label: Use Cases
+      description: Describe specific use cases for this feature
+      placeholder: |
+        1. Use case scenario 1...
+        2. Use case scenario 2...
+        3. Use case scenario 3...
+    validations:
+      required: true
+
+  - type: textarea
+    id: benefits
+    attributes:
+      label: Benefits
+      description: What are the benefits of this feature?
+      placeholder: |
+        - Benefit 1: ...
+        - Benefit 2: ...
+        - Benefit 3: ...
+
+  - type: textarea
+    id: mockups
+    attributes:
+      label: Mockups/Examples
+      description: Any mockups, diagrams, or examples
+      placeholder: Drag and drop images or provide links
+
+  - type: textarea
+    id: implementation
+    attributes:
+      label: Implementation Ideas
+      description: Any thoughts on how this could be implemented?
+      placeholder: |
+        If you have technical knowledge, share implementation ideas.
+        This is optional but helpful.
+
+  - type: textarea
+    id: additional
+    attributes:
+      label: Additional Context
+      description: Any other context or information
+      placeholder: Add any other context, links, or references here
+
+  - type: checkboxes
+    id: checklist
+    attributes:
+      label: Checklist
+      description: Please confirm the following
+      options:
+        - label: I have searched existing issues and PRs for similar requests
+          required: true
+        - label: This feature aligns with the project's goals
+          required: true
+        - label: I have provided clear use cases and benefits
+          required: true
+        - label: I am willing to contribute to this feature (optional)
+          required: false
+
+  - type: markdown
+    attributes:
+      value: |
+        ---
+        **File Metadata**
+        - Template Type: Feature Request
+        - Format: GitHub Issue Form (YAML)
+        - Standard Text Size: 14-16px
+        - Text Intensity: High contrast for accessibility
