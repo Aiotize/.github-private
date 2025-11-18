@@ -1,0 +1,138 @@
+name: Bug Report
+description: Report a bug or unexpected behavior
+title: "[Bug]: "
+labels: ["bug", "needs-triage"]
+assignees:
+  - Aiotize/maintainers
+
+# Metadata
+# Author: Aiotize Organization
+# Version: 1.0.0
+# Last Updated: 2025-10-16
+# Purpose: Standardized bug reporting template
+
+body:
+  - type: markdown
+    attributes:
+      value: |
+        ## Bug Report
+        
+        Thank you for taking the time to report this issue. Please provide as much detail as possible.
+        
+        **Metadata Requirements:**
+        - Use clear, descriptive titles
+        - Provide all requested information
+        - Follow standard text formatting
+        
+  - type: input
+    id: summary
+    attributes:
+      label: Summary
+      description: A clear and concise description of the bug
+      placeholder: Brief summary of the issue
+    validations:
+      required: true
+
+  - type: textarea
+    id: description
+    attributes:
+      label: Detailed Description
+      description: Provide a detailed description of the bug
+      placeholder: |
+        Describe what happened and what you expected to happen.
+        Use standard text formatting with proper line breaks.
+    validations:
+      required: true
+
+  - type: textarea
+    id: steps
+    attributes:
+      label: Steps to Reproduce
+      description: Steps to reproduce the behavior
+      placeholder: |
+        1. Go to '...'
+        2. Click on '...'
+        3. Scroll down to '...'
+        4. See error
+    validations:
+      required: true
+
+  - type: textarea
+    id: expected
+    attributes:
+      label: Expected Behavior
+      description: What should happen?
+      placeholder: Describe the expected behavior
+    validations:
+      required: true
+
+  - type: textarea
+    id: actual
+    attributes:
+      label: Actual Behavior
+      description: What actually happens?
+      placeholder: Describe what actually happened
+    validations:
+      required: true
+
+  - type: textarea
+    id: environment
+    attributes:
+      label: Environment
+      description: Information about your environment
+      placeholder: |
+        - OS: [e.g., Windows 11, macOS 14, Ubuntu 22.04]
+        - Browser: [e.g., Chrome 120, Firefox 121]
+        - Version: [e.g., 1.0.0]
+      value: |
+        - OS: 
+        - Browser: 
+        - Version: 
+    validations:
+      required: true
+
+  - type: textarea
+    id: screenshots
+    attributes:
+      label: Screenshots
+      description: If applicable, add screenshots to help explain your problem
+      placeholder: Drag and drop screenshots here
+
+  - type: textarea
+    id: logs
+    attributes:
+      label: Logs
+      description: Relevant log output
+      render: shell
+
+  - type: textarea
+    id: additional
+    attributes:
+      label: Additional Context
+      description: Any other context about the problem
+      placeholder: Add any other context about the problem here
+
+  - type: checkboxes
+    id: checklist
+    attributes:
+      label: Checklist
+      description: Please confirm the following
+      options:
+        - label: I have searched existing issues to avoid duplicates
+          required: true
+        - label: I have provided all required information
+          required: true
+        - label: I have read the contributing guidelines
+          required: true
+        - label: This issue contains no sensitive information
+          required: true
+
+  - type: markdown
+    attributes:
+      value: |
+        ---
+        **File Metadata**
+        - Template Type: Bug Report
+        - Format: GitHub Issue Form (YAML)
+        - Standard Text Size: 14-16px
+        - Contrast Ratio: 4.5:1 (WCAG AA)

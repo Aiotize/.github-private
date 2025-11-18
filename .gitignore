@@ -1,0 +1,74 @@
+# .gitignore
+# Author: Aiotize Organization
+# Purpose: Exclude build artifacts, dependencies, and temporary files
+# Last Updated: 2025-10-16
+
+# OS Files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+Desktop.ini
+
+# Temporary files
+*.tmp
+*.temp
+*.swp
+*.swo
+*~
+.#*
+
+# IDE and Editor files
+.vscode/
+.idea/
+*.sublime-*
+*.code-workspace
+
+# Build artifacts
+dist/
+build/
+*.log
+*.pid
+*.seed
+*.pid.lock
+
+# Dependencies
+node_modules/
+vendor/
+.npm/
+.yarn/
+
+# Environment files
+.env
+.env.local
+.env.*.local
+*.key
+*.pem
+
+# Backup files
+*.bak
+*.backup
+*-backup
+
+# Test coverage
+coverage/
+.nyc_output/
+*.lcov
+
+# Cache directories
+.cache/
+.parcel-cache/
+.next/
+.nuxt/
+
+# Documentation builds
+_site/
+.jekyll-cache/
+.sass-cache/
+
+# Metadata (system-generated)
+.metadata
+*.iml
